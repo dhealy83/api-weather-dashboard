@@ -19,6 +19,15 @@ buttonAction.addEventListener("click", function(event){
         return data.json();
     }).then(function(data){
         console.log(data[0].lat, data[0].lon);
+
+    var queryURL001 = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + long + "&units=imperial" + "&appid=" + APIkey;
+    citySearch.value
+    fetch(queryURL001).then(function(data){
+        return data.json();
+    }).then(function(data){
+        console.log(queryURL001);
+
+    
         
         var queryURL002 = "https://api.openweathermap.org/data/3.0/onecall?lat=" + data[0].lat + "&lon=" + data[0].lon + "&appid=" + APIkey + "&units=imperial";
         fetch(queryURL002).then(function(data){
@@ -54,9 +63,9 @@ buttonAction.addEventListener("click", function(event){
         ws01.textContent = data.current.wind_speed;
         weatherNowWS.appendChild(ws01)
 
-        var uv01 = document.createElement("h3")
-        uv01.textContent = data.current.uvi;
-        weatherNowUV.appendChild(uv01)
+        // var uv01 = document.createElement("h3")
+        // uv01.textContent = data.current.uvi;
+        // weatherNowUV.appendChild(uv01)
         })
     })
 })
