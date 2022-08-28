@@ -13,16 +13,37 @@ var searchHistory = document.querySelector("#prevSearch");
 
 // console.log(buttonAction);
 
+function fiveDay(data, container) {
+  this.data = data;
+  this.container = container;
+
+  this.render = function () {
+    var loopTemp = document.createElement("p");
+    var loopRh = document.createElement("p");
+    var loopWs = document.createElement("p");
+    var loopUv = document.createElement("p");
+    loopTemp.textContent = this.data.temp.day;
+    loopRh.textContent = this.data.humidity;
+    loopWs.textContent = this.data.wind_speed;
+    loopUv.textContent = this.data.uvi;
+    this.container.append(loopTemp, loopRh, loopWs, loopUv);
+  };
+}
+
 const getWeatherData = function (event) {
   var myCityValue = citySearch.value || event.target.innerHTML;
   // if citysearch.value doesnt exist find the value from event
   console.log(myCityValue);
   var savedCities = JSON.parse(localStorage.getItem("cities")) ?? [];
   console.log(savedCities);
-  if (!savedCities.includes(citySearch.value)) {
-    var updatedCities = [...savedCities, citySearch.value];
-    localStorage.setItem("cities", JSON.stringify(updatedCities));
+  if (citySearch.value === "") {
+    return;
   }
+  if (savedCities)
+    if (!savedCities.includes(citySearch.value)) {
+      var updatedCities = [...savedCities, citySearch.value];
+      localStorage.setItem("cities", JSON.stringify(updatedCities));
+    }
   var queryURL =
     "https://api.openweathermap.org/geo/1.0/direct?q=" +
     myCityValue +
@@ -53,15 +74,6 @@ const getWeatherData = function (event) {
           console.log(data);
           console.log(queryURL002);
 
-          // temp = data.current.temp;
-          // console.log(Math.round(temp));
-          // rh = data.current.humidity;
-          // console.log(rh);
-          // ws = data.current.wind_speed;
-          // console.log(ws);
-          // uv = data.current.uvi;
-          // console.log(uv);
-
           var date = document.createElement("h1");
           dateEl.textContent = "";
           date.textContent = myCityValue.toUpperCase() + " " + dateCall;
@@ -88,6 +100,14 @@ const getWeatherData = function (event) {
           uv.textContent = "";
           uv01.textContent = "UV Index:" + data.current.uvi;
           weatherNowUV.appendChild(uv01);
+
+          for (let index = 0; index < 5; index++) {
+            var dailyPull = new fiveDay(
+              data.daily[index],
+              document.getElementById("day" + (index + 1))
+            );
+            dailyPull.render();
+          }
         });
       // weatherNowTemp.empty()
     });
