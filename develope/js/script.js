@@ -15,6 +15,8 @@ var searchHistory = document.querySelector("#prevSearch");
 
 // console.log(buttonAction);
 
+// href links from the api array call
+
 function images() {}
 
 function fiveDay(data, container) {
@@ -28,9 +30,10 @@ function fiveDay(data, container) {
     var loopRh = document.createElement("p");
     var loopWs = document.createElement("p");
     var loopUv = document.createElement("p");
-    loopDay.textContent = dateCall;
     console.log(loopDay.textContent);
-    console.log(this.data.dt.toLocaleString("DD-MM"));
+    var date = new Date(this.data.dt * 1000);
+    console.log(date.toLocaleDateString());
+    loopDay.textContent = date;
     loopTemp.textContent = loopTemp.textContent = "Temp: " + this.data.temp.day;
     loopRh.textContent = "Humidity: " + this.data.humidity;
     loopWs.textContent = "Wind Speed: " + this.data.wind_speed;
