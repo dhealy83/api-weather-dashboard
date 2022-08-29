@@ -1,5 +1,5 @@
 var APIkey = "7bf7f64189595f977e6ba12b82dac79d";
-var citySearch = document.getElementById("input");
+var citySearch = document.querySelector("#inputSearch");
 var buttonAction = document.querySelector(".btn");
 // var weatherNowTemp = document.getElementById("weatherNowTemp");
 var dateEl = document.getElementById("date");
@@ -31,19 +31,16 @@ function fiveDay(data, container) {
 }
 
 const getWeatherData = function (event) {
-  var myCityValue = citySearch.value || event.target.innerHTML;
-  // if citysearch.value doesnt exist find the value from event
-  console.log(myCityValue);
+  var myCityValue = citySearch.value.trim() || event.target.innerHTML;
   var savedCities = JSON.parse(localStorage.getItem("cities")) ?? [];
   console.log(savedCities);
   if (citySearch.value === "") {
     return;
   }
-  if (savedCities)
-    if (!savedCities.includes(citySearch.value)) {
-      var updatedCities = [...savedCities, citySearch.value];
-      localStorage.setItem("cities", JSON.stringify(updatedCities));
-    }
+  if (!savedCities.includes(citySearch.value)) {
+    var updatedCities = [...savedCities, citySearch.value];
+    localStorage.setItem("cities", JSON.stringify(updatedCities));
+  }
   var queryURL =
     "https://api.openweathermap.org/geo/1.0/direct?q=" +
     myCityValue +
@@ -53,10 +50,11 @@ const getWeatherData = function (event) {
   citySearch.value;
   fetch(queryURL)
     .then(function (data) {
+      console.log("data 1: ", data);
       return data.json();
     })
     .then(function (data) {
-      console.log(data);
+      console.log("data : ", data);
 
       var queryURL002 =
         "https://api.openweathermap.org/data/3.0/onecall?lat=" +
@@ -123,6 +121,7 @@ function renderSearchHistory() {
     var searchButton = document.createElement("button");
     searchButton.textContent = savedCities[index];
     searchButton.addEventListener("click", function (event) {
+      citySearch.value = savedCities[index];
       getWeatherData(event);
     });
     searchItem.appendChild(searchButton);
