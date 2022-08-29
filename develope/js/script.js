@@ -7,26 +7,35 @@ var temp = document.getElementById("weatherNowTemp");
 var rh = document.getElementById("weatherNowRH");
 var ws = document.getElementById("weatherNowWS");
 var uv = document.getElementById("weatherNowUV");
-var dateCall = new Date();
+var dateCall = Date.now.toLocaleString();
+
+// console.log(dateCall);
 var searchHistory = document.querySelector("#prevSearch");
 // console.log(dateCall);
 
 // console.log(buttonAction);
 
+function images() {}
+
 function fiveDay(data, container) {
   this.data = data;
   this.container = container;
+  this.container.innerHTML = "";
 
   this.render = function () {
+    var loopDay = document.createElement("p");
     var loopTemp = document.createElement("p");
     var loopRh = document.createElement("p");
     var loopWs = document.createElement("p");
     var loopUv = document.createElement("p");
-    loopTemp.textContent = this.data.temp.day;
-    loopRh.textContent = this.data.humidity;
-    loopWs.textContent = this.data.wind_speed;
-    loopUv.textContent = this.data.uvi;
-    this.container.append(loopTemp, loopRh, loopWs, loopUv);
+    loopDay.textContent = dateCall;
+    console.log(loopDay.textContent);
+    console.log(this.data.dt.toLocaleString("DD-MM"));
+    loopTemp.textContent = loopTemp.textContent = "Temp: " + this.data.temp.day;
+    loopRh.textContent = "Humidity: " + this.data.humidity;
+    loopWs.textContent = "Wind Speed: " + this.data.wind_speed;
+    loopUv.textContent = "UV Index: " + this.data.uvi;
+    this.container.append(loopDay, loopTemp, loopRh, loopWs, loopUv);
   };
 }
 
@@ -50,12 +59,9 @@ const getWeatherData = function (event) {
   citySearch.value;
   fetch(queryURL)
     .then(function (data) {
-      console.log("data 1: ", data);
       return data.json();
     })
     .then(function (data) {
-      console.log("data : ", data);
-
       var queryURL002 =
         "https://api.openweathermap.org/data/3.0/onecall?lat=" +
         data[0].lat +
