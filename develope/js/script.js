@@ -7,7 +7,7 @@ var temp = document.getElementById("weatherNowTemp");
 var rh = document.getElementById("weatherNowRH");
 var ws = document.getElementById("weatherNowWS");
 var uv = document.getElementById("weatherNowUV");
-var dateCall = Date.now.toLocaleString();
+var dateCall = Date();
 
 // console.log(dateCall);
 var searchHistory = document.querySelector("#prevSearch");
@@ -30,15 +30,28 @@ function fiveDay(data, container) {
     var loopRh = document.createElement("p");
     var loopWs = document.createElement("p");
     var loopUv = document.createElement("p");
+    var icons = this.data.weather[0].icon;
+    var iconUrl = "http://openweathermap.org/img/w/" + icons + ".png";
+    var images = document.createElement("img");
+    images.src = iconUrl;
     console.log(loopDay.textContent);
     var date = new Date(this.data.dt * 1000);
     console.log(date.toLocaleDateString());
-    loopDay.textContent = date;
+    loopDay.textContent = date.toLocaleDateString();
     loopTemp.textContent = loopTemp.textContent = "Temp: " + this.data.temp.day;
     loopRh.textContent = "Humidity: " + this.data.humidity;
     loopWs.textContent = "Wind Speed: " + this.data.wind_speed;
     loopUv.textContent = "UV Index: " + this.data.uvi;
-    this.container.append(loopDay, loopTemp, loopRh, loopWs, loopUv);
+    if (this.data.uvi <= 2.99) {
+      loopUv.style.backgroundColor = "green";
+    } else if (this.data.uvi >= 3 && this.data.uvi <= 5.99) {
+      loopUv.style.backgroundColor = "yellow";
+    } else if (this.data.uvi >= 6 && this.data.uvi <= 7.99) {
+      loopUv.style.backgroundColor = "orange";
+    } else if (this.data.uvi > 8) {
+      loopUv.style.backgroundColor = "red";
+    }
+    this.container.append(loopDay, loopTemp, loopRh, loopWs, loopUv, images);
   };
 }
 
