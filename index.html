@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="./develope/css/reset.css" />
     <link
       rel="stylesheet"
       href="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="./develope/css/reset.css" />
     <link rel="stylesheet" href="./develope/css/style.css" />
   </head>
 
@@ -21,9 +21,9 @@
       </div>
     </header>
 
-    <div class="container gird py-3">
-      <div class="grid box row d-flex justify-content-between nowrap">
-        <ul class="list-group row col-2 text-center">
+    <div class="container grid">
+      <div class="grid box row d-flex nowrap">
+        <ul class=" search list-group row col-sm-3 text-center">
           <li class="list-group-item container">
             <div class="input-group">
               <div
@@ -47,34 +47,20 @@
           </li>
         </ul>
 
-        <div class="container col-10 border border-4" id="weatherNow">
+        <div class="container col-sm-9 border border-1" id="weatherNow">
           <div class="" id="date"></div>
           <div class="" id="weatherNowTemp"></div>
           <div class="" id="weatherNowRH"></div>
           <div class="" id="weatherNowWS"></div>
           <div class="" id="weatherNowUV"></div>
+          <img class="" id="weatherNowICON"></img>
         </div>
 
-        <div
-          class="col row g-col-2 bg-secondary d-flex rounded-2 m-1"
-          id="day1"
-        ></div>
-        <div
-          class="col row g-col-2 bg-secondary d-flex rounded-2 m-1"
-          id="day2"
-        ></div>
-        <div
-          class="col row g-col-2 bg-secondary d-flex rounded-2 m-1"
-          id="day3"
-        ></div>
-        <div
-          class="col row g-col-2 bg-secondary d-flex rounded-2 m-1"
-          id="day4"
-        ></div>
-        <div
-          class="col row g-col-2 bg-secondary d-flex rounded-2 m-1"
-          id="day5"
-        ></div>
+        <div class="col row bg-secondary d-flex rounded-2 m-2" id="day1"></div>
+        <div class="col row bg-secondary d-flex rounded-2 m-2" id="day2"></div>
+        <div class="col row bg-secondary d-flex rounded-2 m-2" id="day3"></div>
+        <div class="col row bg-secondary d-flex rounded-2 m-2" id="day4"></div>
+        <div class="col row bg-secondary d-flex rounded-2 m-2" id="day5"></div>
       </div>
     </div>
 

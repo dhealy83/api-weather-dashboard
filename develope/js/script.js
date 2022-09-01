@@ -7,15 +7,9 @@ var temp = document.getElementById("weatherNowTemp");
 var rh = document.getElementById("weatherNowRH");
 var ws = document.getElementById("weatherNowWS");
 var uv = document.getElementById("weatherNowUV");
+var icon = document.getElementById("weatherNowICON");
 var dateCall = Date();
-
-// console.log(dateCall);
 var searchHistory = document.querySelector("#prevSearch");
-// console.log(dateCall);
-
-// console.log(buttonAction);
-
-// href links from the api array call
 
 function images() {}
 
@@ -121,6 +115,15 @@ const getWeatherData = function (event) {
           uv01.textContent = "UV Index:" + data.current.uvi;
           weatherNowUV.appendChild(uv01);
 
+          icon.src =
+            "http://openweathermap.org/img/w/" +
+            data.current.weather[0].icon +
+            ".png";
+          "http://openweathermap.org/img/w/" +
+            data.current.weather[0].icon +
+            ".png";
+          console.log(data);
+
           for (let index = 0; index < 5; index++) {
             var dailyPull = new fiveDay(
               data.daily[index],
@@ -129,7 +132,6 @@ const getWeatherData = function (event) {
             dailyPull.render();
           }
         });
-      // weatherNowTemp.empty()
     });
 };
 

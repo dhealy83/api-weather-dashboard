@@ -22,3 +22,5 @@ This is is a weather dashboard that shows the current weather and five day forec
   - The five day forecast
 
 - When you come back to the page you will be presented with your previous search results for easy navigation.
+
+![Weather dashboard.](<./assets/_C__Users_drtjp_Desktop_bc-homework_api-weather-dashboard_index.html (3).png>)
